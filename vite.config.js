@@ -6,7 +6,8 @@ export default defineConfig(({ command, mode }) => {
   const isDev = command === 'serve'
 
   return {
-    base: isDev ? '/' : '/mugeshbabu-website-frontend/', // ✅ GitHub Pages base path only for production build
+    // base: isDev ? '/' : '/mugeshbabu-website-frontend/', // ✅ GitHub Pages base path only for production build
+    base: '/',  // ✅ Always root for custom domain i.e mugeshbabu.com
     plugins: [react()],
     server: {
       port: 5173,
