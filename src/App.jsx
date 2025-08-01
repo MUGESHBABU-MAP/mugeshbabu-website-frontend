@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext'
 import Layout from './components/Layout/Layout'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
@@ -46,6 +48,15 @@ import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   const { user, loading } = useAuth()
+  const navigate = useNavigate()
+
+  // ✅ Handle GitHub Pages 404 redirect
+  useEffect(() => {
+    const redirect = new URLSearchParams(window.location.search).get('redirect')
+    if (redirect) {
+      navigate(redirect, { replace: true })
+    }
+  }, [navigate])
 
   if (loading) {
     return (
